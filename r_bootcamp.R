@@ -1,7 +1,7 @@
 # R-Boorcamp
+#1 A Magia do ggplot2
 ##Bibliotecas
 library(ggplot2)
-#1 A Magia do ggplot2
 ##Inspecionando uma variável
 gap1992$pop;
 ## Nomes das variaveis
@@ -50,7 +50,6 @@ ggplot(data = gap1992,
          size = pop)) +
   geom_point() +
   ggtitle("Gapminder for 1992")
-
 
 #2 ggplot2 e dados categoricos
 library(dplyr)
@@ -168,6 +167,15 @@ ggplot(data = pets,
   facet_wrap(facets =~shotsCurrent) +
   theme(axis.text.x = element_text(angle = 45)) +
   ggtitle("Nome e tipo de Animal por shotsCurrent")
+
+### Desafio
+ggplot(data = pets,
+       mapping = aes(
+         x = ageCategory,
+         fill = animal)) +
+  geom_bar(position = "fill") + 
+  facet_wrap(facets =~ shotsCurrent, scale = "free_x")
+
 
 #3 Introducao a dplyr
 
