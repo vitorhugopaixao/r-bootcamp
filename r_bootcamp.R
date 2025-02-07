@@ -184,5 +184,10 @@ ggplot(data = pets,
        )) + geom_boxplot()
 
 #3 Introducao a dplyr
+library(dplyr)
+
+# Manipular quadro de dados
+df.biopics <- readRDS("C:/Users/vitro/git/r-bootcamp/biopics.rds")
+
 
 ## Mais dplayr
