@@ -81,7 +81,7 @@ ggplot(data = pets,
 ggplot(data = pets,
        mapping = aes(
          x = animal,
-         fill = shotsCurrent # colorir as barras conf shotsCurrent
+         fill = shotsCurrent # colorir as barras conf shotsCurrent (animais vacinados)
        )) +
   geom_bar() +
   ggtitle("Quantidade de Animais")
@@ -176,6 +176,12 @@ ggplot(data = pets,
   geom_bar(position = "fill") + 
   facet_wrap(facets =~ shotsCurrent, scale = "free_x")
 
+### Boxplot
+ggplot(data = pets,
+       mapping = aes(
+         x = animal,
+         y = weight
+       )) + geom_boxplot()
 
 #3 Introducao a dplyr
 
