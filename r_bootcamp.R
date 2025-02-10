@@ -187,7 +187,89 @@ ggplot(data = pets,
 library(dplyr)
 
 # Manipular quadro de dados
-df.biopics <- readRDS("C:/Users/vitro/git/r-bootcamp/biopics.rds")
+biopics <- readRDS("C:/Users/vitro/git/r-bootcamp/biopics.rds")
 
+## Inspeciona df
+colnames(biopics)
+levels(biopics$country)
+
+str(biopics)
+glimpse(biopics)
+head(biopics, 4)
+
+summary(biopics)
+
+## Filtro
+biopicsUK <- filter(biopics, country == "UK") 
+
+head(biopicsUK)
+levels(biopics$type_of_subject)
+
+crimeMovies <- filter(biopics, type_of_subject == "Criminal")
+View(crimeMovies)
+
+## Conectores (Enc)
+filter(biopics, year_release > 1980 &
+         type_of_subject == "Criminal"
+       )
+
+filter(biopics, year_release > 1980 & 
+         type_of_subject == "Criminal" & 
+         person_of_color == FALSE
+       )
+
+## Passando resultado de uma funcao como primeiro argumento para a proxima funcao.
+df <- biopics
+df_filtrado <- filter(df, year_release > 1980)
+df_selecionado <- select(df_filtrado, year_release, person_of_color)
+head(df_selecionado)
+
+biopics %>%
+  filter(year_release > 1980) %>%
+  select(year_release, person_of_color)
+
+## %in%
+biopicsUsUk <- biopics %>% 
+  filter(country %in% c("US", "UK"))
+levels(biopicsUsUk$country)
+
+biopicsUsUk <- biopics %>% 
+  filter(country %in% c("US", "UK")) %>%
+  droplevels()
+levels(biopicsUsUk$country)
+
+colnames(biopics)
+levels(biopics$type_of_subject)
+biopicsArt <- biopics %>%
+  filter(type_of_subject %in% 
+           c("Artist", "Musician", "Singer")) %>%
+  select(title, country, director, type_of_subject, subject)
+
+## Remover NA
+filter(biopics, !is.na(box_office))
+
+biopics %>%
+  filter(!is.na(box_office))
+
+filtereBiopics <- biopics %>% 
+  filter(!is.na(box_office))
+nrow(biopics)
+nrow(filtereBiopics)
+
+## Mutate (cria uma nova coluna)
+biopics2 <- biopics %>% 
+  mutate(normalized_box_office = box_office/ number_of_subjects) %>%
+  filter(!is.na(normalized_box_office))
+
+## Paste
+colnames(biopics)
+levels(biopics$subject_race)
+levels(biopics$subject_sex)
+biopics3 <- biopics %>%
+  mutate(race_and_gender = paste(subject_race, subject_sex))
+
+mutate(biopics, 
+       box_office_year = year_release * box_office, 
+       box_office_subject = paste0(box_office_year, subject))
 
 ## Mais dplayr
