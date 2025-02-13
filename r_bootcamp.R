@@ -52,7 +52,7 @@ ggplot(data = gap1992,
   ggtitle("Gapminder for 1992")
 
 #2 ggplot2 e dados categoricos
-library(dplyr)
+library(dplyr) #para o "glimpse".
 # Dados nominais:
 ##  Dados categóricos (factor)
 ##  Dados Ordinais (order)
@@ -269,7 +269,9 @@ biopics3 <- biopics %>%
   mutate(race_and_gender = paste(subject_race, subject_sex))
 
 mutate(biopics, 
-       box_office_year = year_release * box_office, 
-       box_office_subject = paste0(box_office_year, subject))
+       boxOffice_numSubjects = box_office / number_of_subjects, 
+       title_year = paste(title, year_release)) %>%
+  select(title_year, box_office, number_of_subjects, boxOffice_numSubjects)
+
 
 ## Mais dplayr
