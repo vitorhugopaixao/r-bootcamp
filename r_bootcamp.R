@@ -280,7 +280,8 @@ mutate(biopics,
 glimpse(biopics)
 levels(biopics$race_known) # Exemplo original era race_now, mas todos sao NA.
 levels((biopics$subject_race)) # Variavel mais interessante que race_know.
-#### Pipeline: cadeia padronizada de ações de processamento (subRace_pocCode).
+
+### Pipeline: cadeia padronizada de ações de processamento (subRace_pocCode).
 subRace_pocCode <- biopics %>%
   filter(subject_race == "Hispanic (Latino)" | subject_race == "White") %>% # Alterado de race_now para subject_race.
   mutate(poc_code = as.numeric(person_of_color)) %>%
@@ -288,3 +289,18 @@ subRace_pocCode <- biopics %>%
 
 biopics %>%
   filter(country == "US")
+
+### group_by
+#### Combinado com summarize para: mean, max, min, sd.
+##### Pipeline: box_office por country.
+contryMeans <- biopics %>%
+  filter(!is.na(box_office)) %>%
+  group_by(country) %>%
+  summarize(mean_box_office = mean(box_office))
+
+##### Pipeline: box_office por subject_sex.
+sexMeans <- biopics %>%
+  filter(!is.na(box_office)) %>%
+  group_by(subject_sex) %>%
+  summarize(mean_boxOffice_by_gender = mean(box_office))
+  
