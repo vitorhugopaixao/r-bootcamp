@@ -181,7 +181,8 @@ ggplot(data = pets,
        mapping = aes(
          x = animal,
          y = weight
-       )) + geom_boxplot()
+       )) + 
+  geom_boxplot()
 
 #3 Introducao a dplyr
 library(dplyr)
@@ -274,4 +275,16 @@ mutate(biopics,
   select(title_year, box_office, number_of_subjects, boxOffice_numSubjects)
 
 
-## Mais dplayr
+## 4.Mais dplayr
+### Pipe: %>% (entao)
+glimpse(biopics)
+levels(biopics$race_known) # Exemplo original era race_now, mas todos sao NA.
+levels((biopics$subject_race)) # Variavel mais interessante que race_know.
+#### Pipeline: cadeia padronizada de ações de processamento (subRace_pocCode).
+subRace_pocCode <- biopics %>%
+  filter(subject_race == "Hispanic (Latino)" | subject_race == "White") %>% # Alterado de race_now para subject_race.
+  mutate(poc_code = as.numeric(person_of_color)) %>%
+  select(title, country, race_known, subject_race, poc_code)
+
+biopics %>%
+  filter(country == "US")
