@@ -320,4 +320,10 @@ biopics %>%
 biopics %>%
   select(movie_title=title, box_office, subject_sex)
 
-  
+### Desafio juntando tudo
+biopics_new <- biopics %>%
+  filter(year_release >= 2000 & year_release <= 2014, !is.na(box_office)) %>%
+  mutate(box_office_per_subject = box_office / number_of_subjects)
+summary(biopics_new)
+
+
