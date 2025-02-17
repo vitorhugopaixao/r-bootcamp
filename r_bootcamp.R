@@ -303,4 +303,9 @@ sexMeans <- biopics %>%
   filter(!is.na(box_office)) %>%
   group_by(subject_sex) %>%
   summarize(mean_boxOffice_by_gender = mean(box_office))
+
+### Contagem
+biopics %>%
+  group_by(type_of_subject) %>%
+  summarise()
   
