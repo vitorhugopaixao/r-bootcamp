@@ -315,6 +315,9 @@ biopics %>% count(type_of_subject)
 biopics %>%
   arrange(year_release, country) # organiza por ano e, depois, por país.
 
-
+### Selecao
+#### Selecionar, reordenar, renomear colunas
+biopics %>%
+  select(movie_title=title, box_office, subject_sex)
 
   
