@@ -307,5 +307,14 @@ sexMeans <- biopics %>%
 ### Contagem
 biopics %>%
   group_by(type_of_subject) %>%
-  summarise()
+  summarise(count = n())
+# or
+biopics %>% count(type_of_subject)
+
+### Arranjo
+biopics %>%
+  arrange(year_release, country) # organiza por ano e, depois, por país.
+
+
+
   
