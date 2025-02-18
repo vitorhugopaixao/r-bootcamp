@@ -326,7 +326,7 @@ biopics_new <- biopics %>%
   mutate(box_office_per_subject = box_office / number_of_subjects)
 summary(biopics_new)
 
-### Desafio: Mostre o seu trabalho
+### Desafio 2: Mostre o seu trabalho
 #### Filmes cujo subject_race é white são mais rentavéis que filmes indianos? Qual o país mais rentável? 
 glimpse(biopics)
 levels(biopics$race_known)
@@ -340,10 +340,22 @@ boxOffice_contry_subjectRace <- biopics %>%
   summarize(sum_box_office = sum(box_office)) %>%
   arrange(desc(sum_box_office))
 
+### Desafio: reunir ggplot e dplyr.
+colnames(biopics)
+biopics %>%
+  filter(year_release >= 2000 & year_release <= 2014, !is.na(box_office)) %>%
+  mutate(box_office_per_subject = box_office / number_of_subjects) %>%
+  ggplot(mapping = aes(x = year_release, y = box_office_per_subject)) +
+  geom_point()
 
-  
-
-  
-  
-  
-  
+bPlot <- biopics %>%
+  filter(year_release < 1990, 
+         !is.na(box_office)) %>%
+  select(year_release, box_office) %>%
+  ggplot(mapping = aes(
+    x = year_release,
+    y = box_office),
+    color = person_of_color) +
+  geom_point() + 
+  ggtitle("Biopics before 1992.")
+print(bPlot)
