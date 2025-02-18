@@ -204,8 +204,8 @@ summary(biopics)
 biopicsUK <- filter(biopics, country == "UK") 
 
 head(biopicsUK)
-levels(biopics$type_of_subject)
 
+levels(biopics$type_of_subject)
 crimeMovies <- filter(biopics, type_of_subject == "Criminal")
 View(crimeMovies)
 
@@ -326,4 +326,24 @@ biopics_new <- biopics %>%
   mutate(box_office_per_subject = box_office / number_of_subjects)
 summary(biopics_new)
 
+### Desafio: Mostre o seu trabalho
+#### Filmes cujo subject_race é white são mais rentavéis que filmes indianos? Qual o país mais rentável? 
+glimpse(biopics)
+levels(biopics$race_known)
+biopics$race_known
+levels(biopics$subject_race)
+levels(biopics$country)
+boxOffice_contry_subjectRace <- biopics %>%
+  select(country, subject_race, box_office) %>%
+  filter(subject_race %in% c("White", "Indian"), !is.na(box_office)) %>%
+  group_by(subject_race, country) %>%
+  summarize(sum_box_office = sum(box_office)) %>%
+  arrange(desc(sum_box_office))
 
+
+  
+
+  
+  
+  
+  
